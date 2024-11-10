@@ -67,6 +67,7 @@ struct User {
 };
 
 // Function to recommend top products
+// Time Complexity: O(topN * log n)
 vector<Product> recommendTopProducts(priority_queue<Product> maxHeap, int topN) {
     vector<Product> topProducts;
     for (int i = 0; i < topN && !maxHeap.empty(); ++i) {
@@ -180,12 +181,14 @@ int main(int argc, char* argv[]) {
     }
 
     // Global max-heap for all products
+    // Time Complexity: O(m * log m)
     priority_queue<Product> globalHeap;
     for (const auto& product : products) {
         globalHeap.push(product);
     }
 
     // Get top 15 trending products
+    // Time Complexity: O(15 * log m)
     int globalTopN = 15;
     vector<Product> topProducts = recommendTopProducts(globalHeap, globalTopN);
 

@@ -116,6 +116,10 @@ vector<string> recommendProducts(const string& targetUser) {
     return recommendations;
 }
 
+// Time Complexity: O(u.p + u.q.log15)
+// u: number of users in userPurchases, p: number of products a user has purchased, q: number of unique products in the system
+// 15 because we are returning top 15 products
+
 int main(int argc, char* argv[]) {
     // Check for user ID argument
     if (argc < 2) {
@@ -123,12 +127,12 @@ int main(int argc, char* argv[]) {
         return 1;
     }
     
-    string targetUser = argv[1];  // Take user ID from command line
-    string transactionsFile = "dataset/dummy2.json";  // JSON file path
-    string userDataFile = "dataset/users_data.json"; // User data JSON file path
+    string targetUser = argv[1];
+    string transactionsFile = "dataset/dummy2.json";
+    string userDataFile = "dataset/users_data.json";
     
-    populateUserDataFromJson(userDataFile); // Load user data first
-    populatePurchasesFromJson(transactionsFile); // Load transactions
+    populateUserDataFromJson(userDataFile);
+    populatePurchasesFromJson(transactionsFile); 
 
     vector<string> recommendations = recommendProducts(targetUser);
 

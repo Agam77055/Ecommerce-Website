@@ -55,6 +55,9 @@ public:
         }
         node->isEndOfWord = true;
     }
+
+    // Time Complexity: O(mlogk)
+    // m: length of product name, k: the number of products stored at the Trie node corresponding to the prefix.
     
     // Search for products by prefix and return top 5-10 product IDs (case-insensitive)
     vector<int> searchByPrefix(const string& prefix) const {
@@ -72,6 +75,10 @@ public:
         }
         return results;
     }
+
+    // Time ComplexityL O(p + 10logk)
+    // p: length of prefix, k is the number of products stored at the Trie node corresponding to the prefix
+    // 10 becuase we are finding top 10 products
 };
 
 // Function to populate products from a JSON file

@@ -46,7 +46,7 @@ int safe_stoi(const string& str) {
 
 // Function to find the favorite category for a user
 string find_favorite_category(int user_id, const vector<Transaction>& transactions, 
-                               const unordered_map<int, Product>& product_catalog) {
+                              const unordered_map<int, Product>& product_catalog) {
     unordered_map<string, int> category_count;  // Store counts of transactions by category
 
     // Step 1: Count transactions by category for the user
@@ -55,27 +55,29 @@ string find_favorite_category(int user_id, const vector<Transaction>& transactio
             for (int product_id : transaction.product_ids) {
                 auto product = product_catalog.find(product_id);
                 if (product != product_catalog.end()) {
-                    category_count[product->second.category] += 1;  // Increment category count
+                    category_count[product->second.category]++;
                 }
             }
         }
     }
 
-    // Step 2: Use a priority queue (max heap) to find the most frequent category
-    priority_queue<pair<int, string>> max_heap;
+    // Step 2: Find the category with the maximum count
+    string favorite_category;
+    int max_count = 0;
 
-    // Add categories to the heap based on transaction count
     for (const auto& entry : category_count) {
-        max_heap.push({entry.second, entry.first});
+        if (entry.second > max_count) {
+            max_count = entry.second;
+            favorite_category = entry.first;
+        }
     }
 
-    // Step 3: Extract the category with the maximum count
-    if (!max_heap.empty()) {
-        return max_heap.top().second;  // Return the category with the highest count
-    }
-
-    return " ";
+    return favorite_category.empty() ? " " : favorite_category;
 }
+
+// Time Complexity: O(t.p)
+// t: number of transactions, p: number of products per transaction
+
 
 int main(int argc, char* argv[]) {
     // Step 1: Check if user_id is passed as a command-line argument
