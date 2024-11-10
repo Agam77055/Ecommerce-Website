@@ -38,7 +38,7 @@ const CartPage = () => {
           setRecommendations([]); // Handle error and set empty array
         });
     }
-  }, [cart]); // Trigger when the cart updates
+  }, []); // Empty dependency array ensures this runs only once on mount
 
   const handleRemoveFromCart = (productId) => {
     const updatedCart = cart.filter((id) => id !== productId);
