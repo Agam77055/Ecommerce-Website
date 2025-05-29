@@ -6,6 +6,7 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "server": "node server.js",
+    "build": "g++ -o cpp_algorithms/search cpp_algorithms/search.cpp && g++ -o cpp_algorithms/user_recommend cpp_algorithms/user_recommend.cpp && g++ -o cpp_algorithms/fav_category cpp_algorithms/fav_category.cpp && g++ -o cpp_algorithms/brought_together cpp_algorithms/brought_together.cpp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,9 +14,12 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "axios": "^1.9.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.21.1",
+    "mongodb": "^6.16.0",
     "mongoose": "^8.7.2"
   }
 }
