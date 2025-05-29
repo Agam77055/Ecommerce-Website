@@ -1,117 +1,59 @@
-# E-Commerce Website with DSA Algorithms
+# E-commerce Project
 
-This project is an e-commerce website built using **React**, **Node.js**, **Express.js**, and **C++** algorithms. It uses various **Data Structures and Algorithms (DSA)** to provide product recommendations, manage cart functionality, and enable product search. The site also includes a sample dataset of users, products, and transactions.
+This project is a modern e-commerce website built using Next.js, TypeScript, and Tailwind CSS. It includes features such as product listings, cart management, user authentication, and more.
 
 ## Features
 
-- **User Authentication**: 
-  - Login and sign up functionality for users.
-  
-- **Product Recommendations**:
-  - **Similarity Matrix (Python)**: Recommend products based on similar users.
-  - **Favorite Category (Heaps)**: Recommend products from a user's favorite category.
-  - **Similar Products (Bipartite Graphs in C++)**: Recommend products based on similar products purchased by users.
-  - **Trending Products (Heaps)**: Recommend globally trending products.
+- **Product Listings**: Browse and search for products.
+- **Cart Management**: Add, remove, and update items in your cart.
+- **User Authentication**: Sign up and log in using email/password or Google.
+- **Responsive Design**: Optimized for both desktop and mobile devices.
 
-- **Cart Functionality**:
-  - Add products to the cart.
-  - View frequently bought products while viewing the cart.
-  - Simulated "Buy" button that registers transactions in the dataset.
+## Getting Started
 
-- **Product Search**: 
-  - Search for products from the dataset using a tree-based search algorithm in C++.
+### Prerequisites
 
-## Technologies Used
+- Node.js (v14 or later)
+- npm or yarn
 
-- **Frontend**: React
-  
-- **Backend**: Node.js, Express.js
-  
-- **Algorithms**: 
-  - Python for **Similarity Matrix** based recommendations.
-  - C++ for:
-    - **Heaps** for category and trending product recommendations.
-    - **Bipartite Graphs** for similar product recommendations.
-    - **Trees** for product search.
-  - **nlohmann JSON** for JSON processing in C++.
+### Installation
 
-## Installation
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/Agam77055/Ecommerce-Website.git
+   cd Ecommerce-Website
+   ```
 
-To get started with this project, follow the steps below:
+2. Install dependencies:
+   ```sh
+   npm install
+   # or
+   yarn install
+   ```
 
-### 1. Clone the Repository
+3. Run the development server:
+   ```sh
+   npm run dev
+   # or
+   yarn dev
+   ```
 
-```bash
-git clone https://github.com/divyansh1010x/Product-Recomendation-System.git
-cd Product-Recomendation-System
-```
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-### 2. Install Backend Dependencies
+## Project Structure
 
-```bash
-cd server
-npm install
-```
+- `src/`: Contains the source code for the application.
+  - `app/`: Next.js app directory with pages and API routes.
+  - `components/`: Reusable UI components.
+  - `context/`: React context for state management (e.g., cart).
+  - `lib/`: Utility functions and database connections.
+  - `types/`: TypeScript type definitions.
+  - `utils/`: Helper functions.
 
-### 3. Install Frontend Dependencies
+## Deployment
 
-```bash
-cd client
-npm install
-```
+This project is deployed on Render and Vercel.
 
-### 4. Run the Application
+## License
 
-To run the backend server, navigate to the backend folder and run:
-```bash
-#Product-Recomendation-System/server
-npm start
-```
-
-To run the frontend, navigate to the frontend folder and run:
-```bash
-#Product-Recomendation-System/client
-npm start
-```
-
-The application should now be running, and you can access it in your browser.
-
-## Usage
-
-- **Sign Up / Log In**:
-  - Use the sign-up page to create a new user or log in with existing credentials.
-
-- **Recommendations**:
-  - Product recommendations will be made automatically based on the user's preferences, favorite categories, trending products, and similar products.
-
-- **Cart Functionality**:
-  - Add products to your cart and receive suggestions for frequently bought products while viewing your cart.
-
-- **Product Search**:
-  - Use the search feature to search for products within the dataset.
-
-- **Buy Products**:
-  - Use the dummy "Buy" button to simulate a transaction, which will be logged in the dataset.
-
-## Data Structures & Algorithms Used
-
-- **Similarity Matrix (Python)**:
-  - A recommendation engine that suggests products based on user similarities.
-
-- **Heaps (C++)**:
-  - Utilized for recommending products from a user’s favorite category and for showing trending products.
-    
-- **Bipartite Graphs (C++)**:
-  - Used to recommend products based on the relationship between users and products, identifying which products are similar.
-
-- **Trees (C++)**:
-  - Enables fast searching of products using tree-based algorithms.
-
-## Acknowledgments
-
-- **nlohmann JSON**: Used for JSON parsing and handling in C++.
-  
-- **React**: Used for building the frontend.
-  
-- **Node.js and Express.js**: Used to build the backend services.
-
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
