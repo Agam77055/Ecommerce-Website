@@ -26,6 +26,9 @@ struct Product {
     string brand;
     double discountPercentage;
 
+    // Default constructor
+    Product() : key(0), rating(0.0), stock(0), price(0.0), discountPercentage(0.0) {}
+
     Product(int k, const string& n, const string& cat, double r, int s, double p,
             const string& img, const string& d, const string& b, double dp) 
         : key(k), name(n), category(cat), rating(r), stock(s), price(p),
