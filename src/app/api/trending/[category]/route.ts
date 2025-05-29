@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-
-const API_URL = 'http://localhost:5001';
+import { API_URL } from '@/lib/api';
 
 export async function GET(
     request: Request,

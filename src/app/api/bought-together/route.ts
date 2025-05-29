@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
 
   try {
     // Proxy the request to the Express backend
-    const apiRes = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5001'}/api/bought-together?productId=${productId}`);
+    const apiRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001'}/api/bought-together?productId=${productId}`);
     const data = await apiRes.json();
     return NextResponse.json(data, { status: apiRes.status });
   } catch (error) {
