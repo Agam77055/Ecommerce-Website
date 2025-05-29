@@ -1,117 +1,36 @@
-# E-Commerce Website with DSA Algorithms
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-This project is an e-commerce website built using **React**, **Node.js**, **Express.js**, and **C++** algorithms. It uses various **Data Structures and Algorithms (DSA)** to provide product recommendations, manage cart functionality, and enable product search. The site also includes a sample dataset of users, products, and transactions.
+## Getting Started
 
-## Features
-
-- **User Authentication**: 
-  - Login and sign up functionality for users.
-  
-- **Product Recommendations**:
-  - **Similarity Matrix (Python)**: Recommend products based on similar users.
-  - **Favorite Category (Heaps)**: Recommend products from a user's favorite category.
-  - **Similar Products (Bipartite Graphs in C++)**: Recommend products based on similar products purchased by users.
-  - **Trending Products (Heaps)**: Recommend globally trending products.
-
-- **Cart Functionality**:
-  - Add products to the cart.
-  - View frequently bought products while viewing the cart.
-  - Simulated "Buy" button that registers transactions in the dataset.
-
-- **Product Search**: 
-  - Search for products from the dataset using a tree-based search algorithm in C++.
-
-## Technologies Used
-
-- **Frontend**: React
-  
-- **Backend**: Node.js, Express.js
-  
-- **Algorithms**: 
-  - Python for **Similarity Matrix** based recommendations.
-  - C++ for:
-    - **Heaps** for category and trending product recommendations.
-    - **Bipartite Graphs** for similar product recommendations.
-    - **Trees** for product search.
-  - **nlohmann JSON** for JSON processing in C++.
-
-## Installation
-
-To get started with this project, follow the steps below:
-
-### 1. Clone the Repository
+First, run the development server:
 
 ```bash
-git clone https://github.com/divyansh1010x/Product-Recomendation-System.git
-cd Product-Recomendation-System
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-### 2. Install Backend Dependencies
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-```bash
-cd server
-npm install
-```
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-### 3. Install Frontend Dependencies
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-```bash
-cd client
-npm install
-```
+## Learn More
 
-### 4. Run the Application
+To learn more about Next.js, take a look at the following resources:
 
-To run the backend server, navigate to the backend folder and run:
-```bash
-#Product-Recomendation-System/server
-npm start
-```
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-To run the frontend, navigate to the frontend folder and run:
-```bash
-#Product-Recomendation-System/client
-npm start
-```
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-The application should now be running, and you can access it in your browser.
+## Deploy on Vercel
 
-## Usage
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-- **Sign Up / Log In**:
-  - Use the sign-up page to create a new user or log in with existing credentials.
-
-- **Recommendations**:
-  - Product recommendations will be made automatically based on the user's preferences, favorite categories, trending products, and similar products.
-
-- **Cart Functionality**:
-  - Add products to your cart and receive suggestions for frequently bought products while viewing your cart.
-
-- **Product Search**:
-  - Use the search feature to search for products within the dataset.
-
-- **Buy Products**:
-  - Use the dummy "Buy" button to simulate a transaction, which will be logged in the dataset.
-
-## Data Structures & Algorithms Used
-
-- **Similarity Matrix (Python)**:
-  - A recommendation engine that suggests products based on user similarities.
-
-- **Heaps (C++)**:
-  - Utilized for recommending products from a user’s favorite category and for showing trending products.
-    
-- **Bipartite Graphs (C++)**:
-  - Used to recommend products based on the relationship between users and products, identifying which products are similar.
-
-- **Trees (C++)**:
-  - Enables fast searching of products using tree-based algorithms.
-
-## Acknowledgments
-
-- **nlohmann JSON**: Used for JSON parsing and handling in C++.
-  
-- **React**: Used for building the frontend.
-  
-- **Node.js and Express.js**: Used to build the backend services.
-
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

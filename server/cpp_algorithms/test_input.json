@@ -1,0 +1,36 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "Test Product 1",
+      "description": "Desc 1",
+      "price": 10,
+      "thumbnail": "img1.jpg",
+      "brand": "BrandA",
+      "category": "CatA",
+      "rating": 4.5,
+      "stock": 10,
+      "discountPercentage": 0,
+      "images": [],
+      "tags": []
+    },
+    {
+      "id": 2,
+      "title": "Test Product 2",
+      "description": "Desc 2",
+      "price": 20,
+      "thumbnail": "img2.jpg",
+      "brand": "BrandB",
+      "category": "CatB",
+      "rating": 4.0,
+      "stock": 5,
+      "discountPercentage": 0,
+      "images": [],
+      "tags": []
+    }
+  ],
+  "purchases": [
+    { "user": "u1", "product": "1,2" },
+    { "user": "u2", "product": "1" }
+  ]
+} 
