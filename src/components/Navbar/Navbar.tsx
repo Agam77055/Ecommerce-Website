@@ -6,14 +6,9 @@ import { useRouter } from 'next/navigation';
 import SearchInput from "./SearchInput";    
 import HoverGradientText from "./HoverGradientText";
 import { Heart, ShoppingBag, User, LogOut, LogIn, UserCircle, Settings, Package, Menu, X, UserPlus } from "lucide-react";
-import { Poppins } from 'next/font/google';
 import { useCart } from '@/context/CartContext';
 import { useSession, signOut } from "next-auth/react";
 
-const poppins = Poppins({
-    weight: ['400', '500', '600'],
-    subsets: ['latin'],
-});
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -44,7 +39,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className={`bg-white py-4 border-b border-gray-200 ${poppins.className}`}>
+        <nav className={`bg-white py-4 border-b border-gray-200`}>
             <div className="container mx-auto px-4 pl-4 lg:pl-21 flex items-center justify-between w-full transition-all duration-300">
                 {/* Left: Hamburger (mobile only) */}
                 <button
@@ -62,11 +57,11 @@ const Navbar = () => {
                             </HoverGradientText>
                         </Link>
                         <div className="hidden lg:flex items-center space-x-15 ml-15 mt-2.5">
-                            <Link href="/" className={`text-gray-800 hover:text-red-400 transition-colors ${poppins.className}`}>Home</Link>
-                            <Link href="/contact" className={`text-gray-800 hover:text-red-400 transition-colors ${poppins.className}`}>Contact</Link>
-                            <Link href="/about" className={`text-gray-800 hover:text-red-400 transition-colors ${poppins.className}`}>About</Link>
+                            <Link href="/" className={`text-gray-800 hover:text-red-400 transition-colors`}>Home</Link>
+                            <Link href="/contact" className={`text-gray-800 hover:text-red-400 transition-colors`}>Contact</Link>
+                            <Link href="/about" className={`text-gray-800 hover:text-red-400 transition-colors`}>About</Link>
                             {status === "unauthenticated" && (
-                                <Link href="/login" className={`text-gray-800 hover:text-red-400 transition-colors ${poppins.className}`}>Sign In</Link>
+                                <Link href="/login" className={`text-gray-800 hover:text-red-400 transition-colors`}>Sign In</Link>
                             )}
                         </div>
                     </div>
@@ -78,7 +73,7 @@ const Navbar = () => {
                 {/* Right: Search, Cart, User (desktop only) */}
                 <div className="hidden lg:flex items-center gap-6 flex-shrink-0 transition-all duration-300">
                     <SearchInput />
-                    <Link href="/cart" className={`text-gray-400 hover:text-red-400 transition-colors ${poppins.className} relative`}>
+                    <Link href="/cart" className={`text-gray-400 hover:text-red-400 transition-colors relative`}>
                         <div className="relative">
                             <ShoppingBag size={24} />
                             {totalQuantity > 0 && (
@@ -91,7 +86,7 @@ const Navbar = () => {
                     <div className="relative flex items-center" ref={dropdownRef}>
                         <button
                             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                            className={`text-gray-400 hover:text-red-400 transition-colors cursor-pointer ${poppins.className}`}
+                            className={`text-gray-400 hover:text-red-400 transition-colors cursor-pointer`}
                         >
                             <User size={24} />
                         </button>

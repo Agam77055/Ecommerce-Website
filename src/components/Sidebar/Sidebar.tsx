@@ -1,11 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Poppins } from 'next/font/google';
 
-const poppins = Poppins({
-    weight: ['400', '500', '600'],
-    subsets: ['latin'],
-});
 
 const categories = [
     { name: 'Electronics', href: '/category/electronics' },
@@ -27,7 +22,7 @@ const Sidebar: React.FC = () => {
                         <React.Fragment key={category.name}>
                             <Link
                                 href={category.href}
-                                className={`block py-2 px-3 text-gray-600 hover:text-red-400 transition-colors duration-300 ${poppins.className}`}
+                                className={`block py-2 px-3 text-gray-600 hover:text-red-400 transition-colors duration-300`}
                             >
                                 {category.name}
                             </Link>

@@ -7,7 +7,11 @@ const os = require("os");
 const axios = require('axios');
 const { MongoClient } = require('mongodb');
 const bcrypt = require('bcryptjs');
-require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
+
+// Load environment variables from .env file in development
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
+}
 
 class EcommerceServer {
     constructor() {
@@ -31,11 +35,21 @@ class EcommerceServer {
 
     async initializeDatabase() {
         try {
+            if (!process.env.MONGODB_URI) {
+                throw new Error('MONGODB_URI environment variable is not set');
+            }
+            
+            console.log('Attempting to connect to MongoDB...');
             await this.client.connect();
-            console.log('Connected to MongoDB');
+            console.log('Successfully connected to MongoDB');
             this.db = this.client.db('ecommerce_db');
+            
+            // Test the connection
+            await this.db.command({ ping: 1 });
+            console.log('MongoDB connection is healthy');
         } catch (error) {
             console.error('MongoDB connection error:', error);
+            console.error('MongoDB URI:', process.env.MONGODB_URI ? 'URI is set' : 'URI is not set');
             process.exit(1);
         }
     }
