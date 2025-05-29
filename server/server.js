@@ -7,7 +7,7 @@ const os = require("os");
 const axios = require('axios');
 const { MongoClient } = require('mongodb');
 const bcrypt = require('bcryptjs');
-require('dotenv').config();
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 
 class EcommerceServer {
     constructor() {
