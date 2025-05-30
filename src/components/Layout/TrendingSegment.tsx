@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Product } from '@/types/product';
 import ProductCard from '../ProductCard/ProductCard';
+import { endpoints } from '@/lib/api';
 
 interface TrendingSegmentProps {
     tag?: string;
@@ -42,10 +43,11 @@ const TrendingSegment: React.FC<TrendingSegmentProps> = ({ tag }) => {
 
                 // Use 'all' if no tag is provided
                 const tagToFetch = tag || 'all';
-                const response = await fetch(`http://localhost:5001/api/trending/${tagToFetch}`, {
+                const response = await fetch(`/api/trending/${tagToFetch}`, {
                     method: 'GET',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
                     }
                 });
 
@@ -70,7 +72,7 @@ const TrendingSegment: React.FC<TrendingSegmentProps> = ({ tag }) => {
                         );
                     });
                     setTrendingProducts(validProducts);
-                } else if (typeof data === 'object') {
+                } else if (typeof data === 'object' && data !== null) {
                     // Handle tag-wise products
                     const formattedData: TagWiseProducts = {};
                     Object.entries(data).forEach(([tag, products]) => {

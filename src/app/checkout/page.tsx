@@ -29,6 +29,8 @@ interface Product {
     rating: number;
 }
 
+import { endpoints } from '@/lib/api';
+
 export default function CheckoutPage() {
     const router = useRouter();
     const { data: session } = useSession();
@@ -70,14 +72,32 @@ export default function CheckoutPage() {
             if (!session?.user?.id) return;
             setLoadingRecommendations(true);
             try {
-                const response = await fetch(`/api/recommendations?userId=${session.user.id}`);
+                const response = await fetch(`${endpoints.recommendations}?userId=${session.user.id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    cache: 'no-store'
+                });
+                
                 if (!response.ok) {
-                    throw new Error('Failed to fetch recommendations');
+                    const errorText = await response.text();
+                    console.error('Recommendations API error:', {
+                        status: response.status,
+                        statusText: response.statusText,
+                        error: errorText
+                    });
+                    throw new Error(`Failed to fetch recommendations: ${response.statusText}`);
                 }
+                
                 const data = await response.json();
+                if (!Array.isArray(data)) {
+                    throw new Error('Invalid recommendations data format');
+                }
                 setRecommendedProducts(data);
             } catch (err) {
                 console.error('Error fetching recommendations:', err);
+                setError(err instanceof Error ? err.message : 'Failed to load recommendations');
             } finally {
                 setLoadingRecommendations(false);
             }
