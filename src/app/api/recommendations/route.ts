@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { endpoints } from '@/lib/api';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: Request) {
     try {
         const { searchParams } = new URL(request.url);
