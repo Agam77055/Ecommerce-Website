@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../auth/[...nextauth]/route';
+import { GET as authHandler } from '../auth/[...nextauth]/route';
 import { endpoints } from '@/lib/api';
+import { Session } from 'next-auth';
 
 export async function POST(request: Request) {
     try {
         // Check if user is authenticated
-        const session = await getServerSession(authOptions);
+        const session = await getServerSession(authHandler) as Session & { user: { id: string } };
         if (!session?.user) {
             return NextResponse.json(
                 { error: 'Authentication required' },
