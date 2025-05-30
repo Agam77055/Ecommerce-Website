@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { API_URL } from '@/lib/api';
+import { endpoints } from '@/lib/api';
 
 export async function POST(request: Request) {
     try {
@@ -12,17 +12,29 @@ export async function POST(request: Request) {
             );
         }
 
+        console.log('Attempting to connect to search endpoint:', endpoints.search);
+
         // First check if the server is available
         try {
-            const serverCheck = await fetch(`${API_URL}/search`, {
+            const serverCheck = await fetch(endpoints.search, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Accept': 'application/json',
                 },
                 body: JSON.stringify({ searchTerm }),
             });
 
+            console.log('Search API response status:', serverCheck.status);
+
             if (!serverCheck.ok) {
+                const errorText = await serverCheck.text();
+                console.error('Search API error response:', {
+                    status: serverCheck.status,
+                    statusText: serverCheck.statusText,
+                    error: errorText,
+                    url: endpoints.search
+                });
                 return NextResponse.json(
                     { error: 'Search service is currently unavailable' },
                     { status: 503 }
@@ -30,6 +42,7 @@ export async function POST(request: Request) {
             }
 
             const data = await serverCheck.json();
+            console.log('Search API response data:', data);
 
             // Ensure we return an array
             if (!Array.isArray(data)) {

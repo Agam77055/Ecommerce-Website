@@ -1,18 +1,12 @@
 import React from 'react';
 import Header from '@/components/Layout/Header';
 import Footer from '@/components/Layout/Footer';
-import { Poppins } from 'next/font/google';
-
-const poppins = Poppins({
-    weight: ['400', '500', '600'],
-    subsets: ['latin']
-});
 
 export default function About() {
     return (
         <>
             <Header />
-            <main className={`min-h-screen bg-white ${poppins.className}`}>
+            <main className={`min-h-screen bg-white`}>
                 <div className="container mx-auto px-4 py-8">
                     <h1 className="text-3xl text-[#DB4444] font-bold mb-6">About Us</h1>
                     <div className="prose max-w-none">

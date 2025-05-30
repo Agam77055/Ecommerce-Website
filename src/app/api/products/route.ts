@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
+import { endpoints } from '@/lib/api';
 
 export async function GET(request: Request) {
     try {
@@ -14,16 +13,27 @@ export async function GET(request: Request) {
             );
         }
 
-        // Fetch all products first
-        const response = await fetch(`${API_URL}/api/product-ids`);
-        if (!response.ok) {
-            throw new Error('Failed to fetch product IDs');
-        }
+        console.log('Fetching products from:', `${endpoints.products}?ids=${ids}`);
 
-        // Then fetch the specific product
-        const productResponse = await fetch(`${API_URL}/api/products?ids=${ids}`);
+        // Fetch the specific products
+        const productResponse = await fetch(`${endpoints.products}?ids=${ids}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            cache: 'no-store',
+        });
+
         if (!productResponse.ok) {
-            throw new Error('Failed to fetch product');
+            const errorText = await productResponse.text();
+            console.error('Products API error:', {
+                status: productResponse.status,
+                statusText: productResponse.statusText,
+                error: errorText,
+                url: `${endpoints.products}?ids=${ids}`
+            });
+            throw new Error(`Failed to fetch products: ${productResponse.statusText}`);
         }
 
         const data = await productResponse.json();

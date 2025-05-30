@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { API_URL } from '@/lib/api';
+import { endpoints } from '@/lib/api';
 
 export async function GET(
     request: Request,
@@ -8,7 +8,7 @@ export async function GET(
     try {
         // Check if server is available
         try {
-            const serverCheck = await fetch(`${API_URL}/api/product-ids`);
+            const serverCheck = await fetch(endpoints.productIds);
             if (!serverCheck.ok) {
                 throw new Error('Server is not available');
             }
@@ -21,7 +21,7 @@ export async function GET(
 
         // Fetch trending products from the server
         const { category } = await params;
-        const response = await fetch(`${API_URL}/api/trending/${category}`);
+        const response = await fetch(`${endpoints.trending}/${category}`);
         
         if (!response.ok) {
             return NextResponse.json(
