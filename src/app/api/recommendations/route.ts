@@ -1,25 +1,46 @@
 import { NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/lib/auth';
 import { endpoints } from '@/lib/api';
+import { Session } from 'next-auth';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
     try {
-        const { searchParams } = new URL(request.url);
-        const userId = searchParams.get('userId');
-
-        if (!userId) {
+        // Check if user is authenticated
+        const session = await getServerSession(authOptions) as Session & { user: { id: string } };
+        if (!session?.user?.id) {
             return NextResponse.json(
-                { error: 'User ID is required' },
-                { status: 400 }
+                { error: 'Authentication required' },
+                { status: 401 }
             );
         }
 
-        console.log('Fetching recommendations from:', `${endpoints.recommendations}?userId=${userId}`);
+        // Check if server is available
+        try {
+            const serverCheck = await fetch(endpoints.productIds, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (!serverCheck.ok) {
+                throw new Error('Server is not available');
+            }
+        } catch (error) {
+            return NextResponse.json(
+                { error: 'Server is not available' },
+                { status: 503 }
+            );
+        }
 
-        const response = await fetch(`${endpoints.recommendations}?userId=${userId}`, {
+        console.log('Fetching recommendations from:', `${endpoints.recommendations}?userId=${session.user.id}`);
+
+        const response = await fetch(`${endpoints.recommendations}?userId=${session.user.id}`, {
             method: 'GET',
             headers: {
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
             cache: 'no-store',

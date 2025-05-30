@@ -29,8 +29,6 @@ interface Product {
     rating: number;
 }
 
-import { endpoints } from '@/lib/api';
-
 export default function CheckoutPage() {
     const router = useRouter();
     const { data: session } = useSession();
@@ -72,9 +70,10 @@ export default function CheckoutPage() {
             if (!session?.user?.id) return;
             setLoadingRecommendations(true);
             try {
-                const response = await fetch(`${endpoints.recommendations}?userId=${session.user.id}`, {
+                const response = await fetch(`/api/recommendations?userId=${session.user.id}`, {
                     method: 'GET',
                     headers: {
+                        'Accept': 'application/json',
                         'Content-Type': 'application/json',
                     },
                     cache: 'no-store'
@@ -116,6 +115,7 @@ export default function CheckoutPage() {
             setIsProcessing(true);
             setError(null);
 
+            console.log('Starting purchase process...');
             const response = await fetch('/api/purchase', {
                 method: 'POST',
                 headers: {
@@ -126,17 +126,38 @@ export default function CheckoutPage() {
                 }),
             });
 
+            console.log('Purchase API response:', {
+                status: response.status,
+                ok: response.ok,
+                statusText: response.statusText
+            });
+
             if (!response.ok) {
-                throw new Error('Failed to process purchase');
+                const errorData = await response.text();
+                console.error('Purchase failed:', errorData);
+                throw new Error(`Failed to process purchase: ${errorData}`);
+            }
+
+            const responseData = await response.json();
+            console.log('Purchase successful:', responseData);
+
+            if (!responseData.success) {
+                throw new Error('Purchase was not successful');
             }
 
             // Clear the cart before redirection
             clearCart();
+            console.log('Cart cleared, redirecting to thank you page...');
             
-            // Redirect to thank you page
-            console.log('Redirecting to thank you page...');
-            window.location.replace('/thank-you');
-            return; // Prevent any further code execution
+            // Set purchase flag in session storage
+            sessionStorage.setItem('hasPurchased', 'true');
+            
+            // Add a small delay to ensure sessionStorage is set
+            await new Promise(resolve => setTimeout(resolve, 100));
+            
+            // Use Next.js router for redirection with replace to prevent going back
+            router.replace('/thank-you');
+            return;
         } catch (err) {
             console.error('Purchase error:', err);
             setError(err instanceof Error ? err.message : 'An error occurred during checkout');

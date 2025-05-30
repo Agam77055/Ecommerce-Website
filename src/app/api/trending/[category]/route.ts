@@ -8,7 +8,12 @@ export async function GET(
     try {
         // Check if server is available
         try {
-            const serverCheck = await fetch(endpoints.productIds);
+            const serverCheck = await fetch(endpoints.productIds, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            });
             if (!serverCheck.ok) {
                 throw new Error('Server is not available');
             }
@@ -21,7 +26,12 @@ export async function GET(
 
         // Fetch trending products from the server
         const { category } = await params;
-        const response = await fetch(`${endpoints.trending}/${category}`);
+        const response = await fetch(`${endpoints.trending}/${category}`, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
         
         if (!response.ok) {
             return NextResponse.json(
@@ -35,7 +45,8 @@ export async function GET(
         // Format the response based on the data structure
         if (Array.isArray(data)) {
             return NextResponse.json(data);
-        } else if (data.global_trending && data.tag_trending) {
+        } else if (typeof data === 'object' && data !== null) {
+            // Handle tag-wise products (e.g., { watches: [...] })
             return NextResponse.json(data);
         } else {
             return NextResponse.json(

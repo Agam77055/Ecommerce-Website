@@ -3,7 +3,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Product } from '@/types/product';
 import ProductCard from '../ProductCard/ProductCard';
-import { endpoints } from '@/lib/api';
 
 interface TrendingSegmentProps {
     tag?: string;
@@ -92,8 +91,6 @@ const TrendingSegment: React.FC<TrendingSegmentProps> = ({ tag }) => {
                         }
                     });
                     setTrendingProducts(formattedData);
-                } else {
-                    throw new Error('Invalid data format received');
                 }
             } catch (err) {
                 setError(err instanceof Error ? err.message : 'Failed to load trending products');

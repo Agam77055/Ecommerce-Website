@@ -229,6 +229,13 @@ class EcommerceServer {
             const products = await this.getProducts();
             console.log('Total products found:', products.length);
 
+            // Find user in database to verify they exist
+            const user = await this.db.collection('users').findOne({ userid: userId });
+            if (!user) {
+                console.error('User not found:', userId);
+                return res.status(404).json({ error: 'User not found' });
+            }
+
             const transactions = await this.db.collection('user_purchases').find({}).toArray();
             console.log('Total transactions found:', transactions.length);
             
@@ -435,6 +442,13 @@ class EcommerceServer {
             
             if (!user || !product) {
                 return res.status(400).json({ error: 'User and product data required' });
+            }
+
+            // Verify user exists
+            const userDoc = await this.db.collection('users').findOne({ userid: user });
+            if (!userDoc) {
+                console.error('User not found:', user);
+                return res.status(404).json({ error: 'User not found' });
             }
 
             // Convert product to string format if it's an array

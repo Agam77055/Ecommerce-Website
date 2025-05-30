@@ -1,7 +1,9 @@
-import { getServerSession } from "next-auth";
-import { GET as authHandler } from "../[...nextauth]/route";
+// app/api/auth/session/route.ts
+import { getServerSession } from "next-auth/next";
+import { authOptions }       from "@/lib/auth";
+import { NextResponse }      from "next/server";
 
 export async function GET() {
-  const session = await getServerSession(authHandler);
-  return Response.json(session);
-} 
+  const session = await getServerSession(authOptions);
+  return NextResponse.json(session);
+}
