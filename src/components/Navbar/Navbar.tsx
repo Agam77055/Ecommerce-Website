@@ -56,7 +56,7 @@ const Navbar = () => {
                                 Exclusive
                             </HoverGradientText>
                         </Link>
-                        <div className="hidden lg:flex items-center space-x-15 ml-15 mt-2.5">
+                        <div className="hidden lg:flex items-center space-x-8 ml-16 mt-2.5">
                             <Link href="/" className={`text-gray-800 hover:text-red-400 transition-colors`}>Home</Link>
                             <Link href="/contact" className={`text-gray-800 hover:text-red-400 transition-colors`}>Contact</Link>
                             <Link href="/about" className={`text-gray-800 hover:text-red-400 transition-colors`}>About</Link>

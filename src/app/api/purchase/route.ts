@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]/route';
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
+import { endpoints } from '@/lib/api';
 
 export async function POST(request: Request) {
     try {
@@ -30,7 +29,7 @@ export async function POST(request: Request) {
         });
 
         // Send purchase data to backend
-        const response = await fetch(`${API_URL}/api/purchase`, {
+        const response = await fetch(endpoints.purchase, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

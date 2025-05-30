@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { endpoints } from '@/lib/api';
 
 export async function GET(request: Request) {
     try {
@@ -12,17 +13,19 @@ export async function GET(request: Request) {
             );
         }
 
-        // Use absolute URL for server endpoint
-        const serverUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
-        const response = await fetch(`${serverUrl}/api/recommendations?userId=${userId}`, {
+        console.log('Fetching recommendations from:', `${endpoints.recommendations}?userId=${userId}`);
+
+        const response = await fetch(`${endpoints.recommendations}?userId=${userId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
             },
+            cache: 'no-store',
         });
 
         if (!response.ok) {
-            throw new Error('Failed to fetch recommendations');
+            console.error('Recommendations API error:', response.status, response.statusText);
+            throw new Error(`Failed to fetch recommendations: ${response.statusText}`);
         }
 
         const data = await response.json();

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Poppins } from 'next/font/google';
 import Image from 'next/image';
 import GooglePlay from '@/assets/Footer/GooglePlay.svg';
 import AppStore from '@/assets/Footer/AppStore.svg';
@@ -10,14 +9,10 @@ import Twitter from '@/assets/Footer/Icon-Twitter.svg';
 import QRCode from '@/assets/Footer/QrCode.svg';
 import Link from 'next/link';
 
-const poppins = Poppins({
-    weight: ['400', '500', '600'],
-    subsets: ['latin']
-});
 
 const Footer: React.FC = () => {
     return (
-        <footer className={`bg-black text-white py-8 ${poppins.className}`}>
+        <footer className={`bg-black text-white py-8`}>
             <div className="container mx-auto pt-6 px-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 lg:gap-6">
                     {/* Section 1 - Wider column */}
